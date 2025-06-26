@@ -1,19 +1,9 @@
+import { apiRequest } from "./ApiClient"; // adjust path as needed
+
 export async function signupUser(userData) {
-  const response = await fetch(
-    "https://charitraa.pythonanywhere.com/auth/create/",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    }
-  );
+  return apiRequest("/auth/create/", "POST", userData);
+}
 
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.detail || "Signup failed");
-  }
-
-  return response.json();
+export async function loginUser({ email, password }) {
+  return apiRequest("/auth/login/", "POST", { username: email, password });
 }

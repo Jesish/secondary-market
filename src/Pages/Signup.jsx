@@ -4,10 +4,10 @@ import { useMutation } from "@tanstack/react-query";
 import { signupUser } from "../API/Auth";
 
 function Signup() {
-  const [name, setName] = useState("");
+  const [fullname, setfullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [username, setUsername] = useState("");
   const mutation = useMutation({
     mutationFn: signupUser,
     onSuccess: (data) => {
@@ -20,7 +20,12 @@ function Signup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    mutation.mutate({ name, email, password });
+    mutation.mutate({
+      username,
+      email,
+      password,
+      full_name: fullname,
+    });
   };
 
   return (
@@ -41,8 +46,8 @@ function Signup() {
             <input
               type="text"
               placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={fullname}
+              onChange={(e) => setfullName(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-amber-400"
               required
             />
@@ -62,6 +67,15 @@ function Signup() {
               className="w-full px-4 py-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-amber-400"
               required
             />
+            <input
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-amber-400"
+              required
+            />
+
             <button
               type="submit"
               disabled={mutation.isLoading}
@@ -72,7 +86,7 @@ function Signup() {
           </form>
           <p className="text-sm text-gray-600 mt-4">
             Already have an account?{" "}
-            <Link to="/" className="text-amber-600 hover:underline">
+            <Link to="/login" className="text-amber-600 hover:underline">
               Login
             </Link>
           </p>
