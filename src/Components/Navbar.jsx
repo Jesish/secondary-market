@@ -19,7 +19,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn }) => {
           <Link to="/shop" className="hover:text-amber-600">
             Shop
           </Link>
-          <Link to="/sell" className="hover:text-amber-600">
+          <Link to="/product" className="hover:text-amber-600">
             Sell
           </Link>
 
